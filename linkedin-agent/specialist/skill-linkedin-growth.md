@@ -1,95 +1,119 @@
-# skill: linkedin-growth
+---
+name: linkedin-growth
+description: Estrategia de crecimiento LinkedIn basada en David Ibanez (Linked360, 22K seguidores) y mejores practicas 2026. Aplicar cuando se crea contenido o se optimiza el perfil LinkedIn.
+---
 
-## Overview
-LinkedIn algorithm strategy for 2026. Maximizes reach, saves, and follower growth for technical content about AI agents. Based on real production data from Carlos De La Torre's account (740+ impressions from 2 posts, April 2026).
+# LinkedIn Growth — Estrategia 2026
 
-## Cuándo activar
-- Antes de publicar cualquier post
-- Al planificar el calendario de contenido semanal
-- Cuando engagement cae por debajo del baseline
+Basado en el análisis de David Ibáñez (Linked360 AI, 22K seguidores) y las mejores prácticas confirmadas de LinkedIn 2026.
 
-## Métricas objetivo 2026
-| Métrica | Objetivo | Realidad actual |
-|---------|----------|-----------------|
-| Impressions/post | 500+ | 34-83 (primeros posts) |
-| Saves/post | 5+ | En progreso |
-| Engagement rate | 2-6% | Carrusel: 6.10% avg |
-| Conexiones/semana | 100-200 | 8-100/día operativo |
-| SSI Score | 70+ | 62/100 actual |
+## REGLAS DEL ALGORITMO 2026
 
-## Jerarquía de engagement (orden de importancia)
+1. **Relevancia > Volumen** — LinkedIn premia contenido que aporta valor real, no cantidad
+2. **Conversación > Likes** — Los comentarios pesan más que las reacciones
+3. **Dwell time** — El tiempo que la gente pasa leyendo tu post importa (carruseles generan más)
+4. **Saves > Shares > Comments > Likes** — En ese orden de importancia
+5. **Primeros 60 minutos** — Los primeros comentarios/reacciones determinan el alcance
+6. **NO links externos** — LinkedIn penaliza posts con links fuera (-60% alcance)
+7. **Consistencia** — Mejor 3 posts/semana buenos que 7 mediocres
+
+## FORMATO POR ENGAGEMENT (de mayor a menor)
+
+| Formato | Engagement | Cuándo usar |
+|---------|-----------|-------------|
+| **Carrusel PDF** | 6.10% avg | Explicar procesos, tutoriales, frameworks |
+| **Multi-imagen** | 6.60% avg | Mostrar trabajo real, screenshots |
+| **Video nativo corto** | Alto dwell time | Demos, explicaciones personales |
+| **Texto con imagen** | Medio | Opiniones, historias, resultados |
+| **Solo texto** | Bajo | Solo si la historia es muy potente |
+
+## ESTRUCTURA DEL POST PERFECTO
+
 ```
-1. SAVES        ← señal más fuerte: "bookmarkeable"
-2. SHARES       ← distribución orgánica
-3. COMMENTS     ← debate, respuestas de valor
-4. LIKES        ← mínimo impacto en distribución
-```
-**Consecuencia práctica:** El contenido debe responder "¿alguien guardaría esto?" antes de publicar.
+LÍNEA 1 — HOOK (máx 150 chars antes del "ver más")
+   Dato impactante, pregunta, o declaración controversial
 
-## Formatos por engagement (datos 2026)
-| Formato | Avg Engagement | Alcance | Cuándo usar |
-|---------|---------------|---------|-------------|
-| Carrusel PDF | 6.10% | Alto | Tutoriales, comparativas, datos |
-| Vídeo nativo | 5.8% | Muy alto | Demos, behind the scenes |
-| Imagen + texto | 2.3% | Medio | Quotes, datos únicos |
-| Solo texto | 1.9% | Bajo | Reflexiones, threads |
-| Artículo LinkedIn | 0.8% | Muy bajo | Evitar |
+[espacio]
 
-**Formatos prohibidos:** Links externos en el post (-60% alcance). Los links van en comentario fijado.
+LÍNEA 2-3 — CONTEXTO
+   ¿Por qué esto importa? ¿Qué problema resuelve?
 
-## Timing óptimo España/LATAM
-```
-Días top:     Martes, Miércoles, Jueves
-Hora España:  14:00 CEST (verano) / 13:00 CET (invierno)
-Hora RD:      08:00 AST (verano) / 07:00 AST (invierno)
-Golden hour:  Los primeros 60 min determinan el alcance total
-```
+[espacio]
 
-**Protocolo golden hour:**
-1. Publicar exactamente a las 14:00 CEST
-2. Durante los primeros 60 min: responder TODOS los comentarios
-3. Añadir link en comentario fijado inmediatamente después de publicar
-4. No publicar otro post en 24h (canibalización)
+CUERPO — VALOR REAL (3-5 puntos)
+   Explicar, enseñar, mostrar. Datos concretos.
 
-## SSI Score — Subsistemas y acciones
-LinkedIn mide 4 subsistemas (meta: 70/100):
-```
-1. Perfil completo       → foto profesional, headline, about
-2. Encontrar personas    → search + connect personas relevantes
-3. Compartir contenido   → 1 post/día, no más
-4. Interactúa info.      → comentar 5 posts/día (#AIAgents, #Claude)
-   ACTUAL: 11/100 — PRIORIDAD MÁXIMA
+[espacio]
+
+CIERRE — REFLEXIÓN
+   No CTA. No "sígueme". Una reflexión honesta.
+
+[espacio]
+
+HASHTAGS — 3-5 relevantes al final
 ```
 
-## Reglas de contenido (algoritmo 2026)
-- **Max 1 post/día** — más frecuencia = penalización algoritmo
-- **Hashtags:** máx 5, específicos (#AIAgents #Claude #MultiAgent)
-- **Hook:** 150 caracteres antes del "ver más" — debe detener el scroll
-- **Links:** SIEMPRE en comentario, nunca en el post
-- **Mención personas:** solo si genuinamente relevante (no baiting)
-- **Engagement bait prohibido:** "like si...", "comenta si...", "comparte si..."
+## PERFIL OPTIMIZADO (aprender de David Ibáñez)
 
-## Flujo completo publicación
-```
-Día anterior (19-22h RD):
-  1. Redactar post con brand-voice
-  2. Crear imagen con canva MCP (fondo #eeece2)
-  3. Guardar draft en content/posts/YYYY-MM-DD-titulo.md
+### Banner
+- NO decorativo — MENSAJE CLARO de qué haces y para quién
+- Nuestro debería decir algo como: "29 AI agents orchestrated in production. SYPNOSE methodology."
+- Incluir URL si aplica
 
-Día publicación (14:00 CEST):
-  4. Carlos abre Chrome CDP (si imagen adjunta)
-  5. Skill content-posts activa → publicar
-  6. Comentario fijado con link/recurso adicional
-  7. Golden hour: responder comentarios en 60 min
+### Headline
+- Fórmula: [Qué haces] | [Para quién] | [Resultado]
+- David: "La herramienta de IA que convierte contenido LinkedIn en máquina de negocio"
+- Nosotros: "AI Orchestration Architect | Creator of SYPNOSE | 42 AI Models, 1 Method"
 
-Post-publicación:
-  8. Monitorear impressions a las 2h, 24h, 72h
-  9. Guardar métricas en data/metricas.json
-  10. Analizar qué formato funcionó mejor
-```
+### About
+- 3 párrafos: Quién soy, qué hago, resultados
+- Números concretos
+- NO vender — mostrar
 
-## Datos de referencia (posts publicados)
-- Post "47 models 95% free": 40 impressions — URN 7448349868399591424
-- Post "Managed Agents vs Sypnose": 34 impressions — URN 7448349315376435201
-- Post "Boris viral": publicado por Carlos, referencia voz correcta
-- Comentarios en posts virales: Pascal Bornet (354 reactions), Elizaveta (97), LinkedIn Learning (19)
+### Featured
+- Pinear 3-5 items: mejor carrusel, mejor post, portfolio, GitHub
+
+## ESTRATEGIA DE CONTENIDO SYPNOSE
+
+### Foco en 2-3 temas (80% del contenido)
+1. **AI Orchestration** — cómo coordinar múltiples agentes
+2. **Quality in AI** — Boris, verificación, por qué la calidad importa
+3. **Real production** — números reales, problemas reales, soluciones reales
+
+### Cadencia
+- **Lunes**: Post nuevo (carrusel o imagen con plan real)
+- **Miércoles**: Post nuevo (diferente ángulo)
+- **Viernes**: Post nuevo o compartir algo relevante con comentario
+- **Diario**: Responder comentarios, engagement orgánico
+
+### Tipos de post que funcionan
+- "Esto es lo que pasa cuando corres 29 agentes en producción" (historia real)
+- Carrusel explicando un concepto SYPNOSE (Knowledge Hub, Boris, etc.)
+- Screenshot real del sistema con explicación
+- Comparativa: "Sin SYPNOSE vs Con SYPNOSE"
+- Error que cometimos y cómo lo resolvimos (vulnerabilidad = conexión)
+
+## CRECIMIENTO DE RED
+
+- 100 conexiones/día con `/linkedin-connect` (builders AI, no recruiters)
+- Foco: España + LATAM
+- Comentar en posts de otros CON VALOR (no "great post")
+- Cuando comentes, aporta experiencia real: "We run 29 agents and..."
+
+## MÉTRICAS A SEGUIR
+
+- Seguidores: actual ~2300 → objetivo 5000 (3 meses)
+- Impresiones por post: tracking semanal
+- Comentarios por post: objetivo >5
+- Saves por post: objetivo >10
+- Mensajes entrantes: gente que nos contacta sin que busquemos
+
+## LO QUE NO HACER
+
+- NO vender en posts
+- NO CTAs agresivos ("sígueme", "comenta si...")
+- NO links externos en el post (van en comentario)
+- NO copiar contenido de otros
+- NO publicar por publicar — si no tienes algo bueno, no publiques
+- NO responder tarde a comentarios (primeros 60 min son críticos)
+- NO usar hashtags genéricos (#AI #Technology) — usar específicos (#AIOrchestration #MultiAgent)
