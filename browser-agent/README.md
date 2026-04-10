@@ -53,16 +53,16 @@ Install this MCP agent: https://github.com/sypnose-cloud/agent-free
     },
     "search": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "args": ["-y", "tavily-mcp@latest"],
       "env": {
-        "BRAVE_API_KEY": "your-key-here"
+        "TAVILY_API_KEY": "your-key-here"
       }
     }
   }
 }
 ```
 
-Get a free Brave Search API key at [brave.com/search/api](https://brave.com/search/api) — 2,000 searches/month free.
+Get a free Tavily API key at [app.tavily.com](https://app.tavily.com) — 1,000 searches/month, no credit card needed.
 
 **No Brave key?** Claude can still search via Google through the browser. Just skip the search block.
 
