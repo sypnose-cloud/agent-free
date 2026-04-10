@@ -52,19 +52,15 @@ Install this MCP agent: https://github.com/sypnose-cloud/agent-free
       "args": ["-y", "@playwright/mcp", "--browser", "chromium"]
     },
     "search": {
-      "command": "npx",
-      "args": ["-y", "tavily-mcp@latest"],
-      "env": {
-        "TAVILY_API_KEY": "your-key-here"
-      }
+      "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=your-key-here"
     }
   }
 }
 ```
 
-Get a free Tavily API key at [app.tavily.com](https://app.tavily.com) — 1,000 searches/month, no credit card needed.
+Get a free Tavily API key at [app.tavily.com](https://app.tavily.com) — 1,000 searches/month, no credit card needed. Then replace `your-key-here` in the URL above.
 
-**No Brave key?** Claude can still search via Google through the browser. Just skip the search block.
+**No key?** Claude can still search via Google through the browser. Just skip the search block.
 
 **Claude Code:**
 ```bash
