@@ -41,13 +41,6 @@ Merge this into the `mcpServers` section (do NOT overwrite existing servers):
 "browser": {
   "command": "npx",
   "args": ["-y", "@playwright/mcp", "--browser", "chromium"]
-},
-"search": {
-  "command": "npx",
-  "args": ["-y", "tavily-mcp@latest"],
-  "env": {
-    "TAVILY_API_KEY": "your-key-here"
-  }
 }
 ```
 
@@ -55,14 +48,7 @@ For persistent login (recommended), add `--user-data-dir` to the browser args:
 - Windows: `"C:\\Users\\<username>\\claude-browser"`
 - Mac/Linux: `"/Users/<username>/claude-browser"`
 
-**Step 4 — Handle Tavily key**
-
-Ask the user: "Do you have a Tavily API key? It's free at app.tavily.com (no credit card needed, 1,000 searches/month). Paste it and I'll add it automatically. Or skip — you can add it later."
-
-If they provide a key, replace `your-key-here` with their key.
-If they skip, remove the `search` block entirely.
-
-**Step 5 — Save and confirm**
+**Step 4 — Save and confirm**
 
 Write the updated config. Then tell the user:
 
