@@ -52,7 +52,7 @@ For persistent login (recommended), add `--user-data-dir` to the browser args:
 
 Write the updated config. Then tell the user:
 
-> "Done! Restart Claude for the changes to take effect.
+> "Done! Now restart Claude completely (close and reopen the app) for the changes to take effect.
 > After restart, Claude can navigate any website, click, fill forms, and take screenshots."
 
 ---
