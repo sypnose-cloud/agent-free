@@ -4,15 +4,17 @@
       "command": "npx",
       "args": ["-y", "@playwright/mcp@latest", "--cdp-endpoint", "http://localhost:9222"],
       "description": "Chrome con sesión LinkedIn activa via CDP. Requiere Chrome lanzado con --remote-debugging-port=9222",
-      "use_for": "Automatización LinkedIn principal: navegar, click, escribir, screenshot, posts, conexiones",
-      "skills": ["linkedin-connect", "connections-optimizer", "content-posts", "data-scraper-agent", "crosspost"]
+      "use_for": "Automatización LinkedIn: navegar, click, publicar posts, enviar conexiones, screenshots",
+      "skills": ["linkedin-connect", "connections-optimizer", "content-posts", "data-scraper-agent", "crosspost"],
+      "prereq": "chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\Users\carlo\chrome-debug-profile"
     },
-    "browser": {
+    "browser-agent": {
       "command": "npx",
-      "args": ["-y", "@playwright/mcp@latest", "--browser", "chromium", "--user-data-dir", "C:\Users\carlo\chrome-debug-profile"],
-      "description": "Chromium fresco con mismo perfil de usuario. Fallback cuando CDP no disponible.",
-      "use_for": "Navegación general sin CDP activo",
-      "skills": ["deep-research", "data-scraper-agent"]
+      "args": ["-y", "@playwright/mcp@latest", "--browser", "chrome"],
+      "description": "Chrome real para navegación estilo Perplexity. Sin CDP. Sin prerequisitos. Claude abre Chrome automáticamente.",
+      "use_for": "Investigar URLs, empresas, personas, noticias. Cualquier página pública sin sesión.",
+      "skills": ["deep-research", "data-scraper-agent", "exa-search", "social-graph-ranker"],
+      "vs_playwright": "playwright = tu Chrome con LinkedIn abierto. browser-agent = Chrome limpio para cualquier URL."
     },
     "knowledge-hub": {
       "command": "npx",
@@ -20,11 +22,12 @@
       "description": "Memoria persistente Sypnose. REQUIERE SSH tunnel activo antes de iniciar Claude.",
       "tunnel": "ssh -L 18793:localhost:18793 -p $SYPNOSE_SSH_PORT $SYPNOSE_SSH_USER@$SYPNOSE_SSH_HOST -N &",
       "use_for": "kb_save, kb_list — guardar y recuperar contexto entre sesiones",
-      "skills": ["daily"]
+      "skills": ["daily"],
+      "optional": true
     },
     "canva": {
       "type": "claude_ai_mcp",
-      "description": "Canva MCP nativo de Claude AI. No requiere instalación separada.",
+      "description": "MCP nativo Claude AI. No requiere instalación.",
       "use_for": "Imágenes posts LinkedIn, carruseles PDF, banners perfil",
       "brand": {
         "bg": "#eeece2",
@@ -36,29 +39,29 @@
     },
     "figma": {
       "type": "claude_ai_mcp",
-      "description": "Figma MCP nativo de Claude AI.",
-      "use_for": "Diseños complejos, diagramas FigJam, arquitecturas visuales"
+      "description": "MCP nativo Claude AI.",
+      "use_for": "Diseños complejos, diagramas FigJam"
     },
     "gmail": {
       "type": "claude_ai_mcp",
-      "description": "Gmail MCP nativo de Claude AI.",
-      "use_for": "Cold emails, respuestas recruiters, outreach",
+      "description": "MCP nativo Claude AI.",
+      "use_for": "Cold emails, respuestas recruiters",
       "skills": ["lead-intelligence"]
     },
     "google-calendar": {
       "type": "claude_ai_mcp",
-      "description": "Google Calendar MCP nativo de Claude AI.",
-      "use_for": "Follow-ups, scheduling calls, recordatorios de golden hour",
+      "description": "MCP nativo Claude AI.",
+      "use_for": "Follow-ups, scheduling calls, recordatorios golden hour",
       "skills": ["daily", "lead-intelligence"]
     },
     "exa": {
       "command": "npx",
       "args": ["-y", "@exa-labs/exa-mcp-server"],
       "env": { "EXA_API_KEY": "$EXA_API_KEY" },
-      "description": "Búsqueda neural Exa. Instalación: npm install -g @exa-labs/exa-mcp-server. API key en exa.ai (free tier: 1000 búsquedas/mes).",
-      "use_for": "Investigación profunda de personas y empresas, búsqueda semántica, find_similar pages",
+      "description": "Búsqueda neural. API key en exa.ai (free: 1000 búsquedas/mes).",
+      "use_for": "Investigación profunda personas/empresas, búsqueda semántica, find_similar",
       "skills": ["exa-search", "deep-research", "lead-intelligence", "social-graph-ranker"],
-      "free_alternative": "WebSearch nativo de Claude Code (menos preciso, sin find_similar)"
+      "free_alternative": "WebSearch nativo o browser-agent → Google"
     },
     "x-api": {
       "command": "npx",
@@ -69,41 +72,39 @@
         "TWITTER_ACCESS_TOKEN": "$TWITTER_ACCESS_TOKEN",
         "TWITTER_ACCESS_TOKEN_SECRET": "$TWITTER_ACCESS_TOKEN_SECRET"
       },
-      "description": "API oficial X/Twitter. Instalación: npm install -g @modelcontextprotocol/server-twitter. API keys en developer.twitter.com (Basic tier: $100/mes). Alternativa gratuita: playwright MCP → twitter.com con sesión activa.",
-      "use_for": "Publicar threads técnicos, buscar conversaciones sobre AI agents, analizar engagement, monitorear menciones Sypnose",
+      "description": "API oficial X/Twitter. Keys en developer.twitter.com (Basic: $100/mes).",
+      "use_for": "Publicar threads, buscar conversaciones AI, monitorear menciones Sypnose",
       "skills": ["x-api", "crosspost", "deep-research"],
-      "free_alternative": "playwright MCP → twitter.com (publicar manual, sin búsqueda API)"
+      "free_alternative": "browser-agent → twitter.com (publicar manual, sin búsqueda API)"
     },
     "data-scraper": {
-      "note": "No requiere MCP separado. Usa playwright (ya instalado) como motor de scraping.",
-      "description": "Para scraping avanzado usar Gemini Flash via CLIProxy (contexto 1M tokens, GRATIS). Ver clliproxy_models.",
-      "use_for": "Scraping bulk de perfiles LinkedIn, monitoreo posts virales, extracción datos empresas",
+      "note": "No MCP separado. Usa browser-agent + Gemini Flash (CLIProxy, gratis).",
+      "use_for": "Scraping bulk perfiles LinkedIn, posts virales, datos empresas",
       "skills": ["data-scraper-agent"],
       "setup": {
-        "motor_scraping": "playwright MCP (ya instalado)",
-        "modelo_analisis": "gemini-2.5-flash via CLIProxy (gratis, contexto 1M tokens)",
-        "almacenamiento": "data/contactos_nuevos_YYYY-MM-DD.json",
-        "rate_limit": "max 100 acciones/día LinkedIn — NO superar"
+        "motor": "browser-agent (chrome)",
+        "analisis": "gemini-2.5-flash via CLIProxy (gratis, 1M tokens contexto)",
+        "output": "data/contactos_nuevos_YYYY-MM-DD.json",
+        "rate_limit": "max 100 acciones/día LinkedIn"
       }
     }
   },
   "chrome_setup": {
-    "command": "\"C:\Program Files\Google\Chrome\Application\chrome.exe\" --remote-debugging-port=9222 --user-data-dir=\"C:\Users\carlo\chrome-debug-profile\"",
+    "cdp_command": "\"C:\Program Files\Google\Chrome\Application\chrome.exe\" --remote-debugging-port=9222 --user-data-dir=\"C:\Users\carlo\chrome-debug-profile\"",
     "verify": "curl http://localhost:9222/json/version",
-    "note": "Carlos ejecuta este comando antes de iniciar Claude cuando se necesita automatización LinkedIn"
+    "note": "Solo necesario para MCP 'playwright'. MCP 'browser-agent' no necesita esto."
   },
   "clliproxy_models": {
-    "note": "46 modelos via CLIProxy (requiere SSH tunnel al servidor Sypnose). Meta: 80%+ trabajo con modelos GRATIS.",
+    "note": "46 modelos via CLIProxy. Meta: 80%+ trabajo GRATIS.",
     "tunnel": "ssh -L 8317:localhost:8317 -p $SYPNOSE_SSH_PORT $SYPNOSE_SSH_USER@$SYPNOSE_SSH_HOST -N &",
-    "endpoint": "http://localhost:8317/v1/chat/completions",
     "free": {
-      "qwen3-coder-plus": "Scripts, automatización, código",
-      "gemini-2.5-flash": "Análisis textos largos, investigación, contexto 1M tokens",
-      "gemini-2.0-flash": "Análisis rápido, noticias, resúmenes",
-      "deepseek-v3": "Reasoning, análisis técnico"
+      "qwen3-coder-plus": "Scripts, código, automatización",
+      "gemini-2.5-flash": "Análisis textos largos, contexto 1M tokens",
+      "gemini-2.0-flash": "Análisis rápido, noticias",
+      "deepseek-v3": "Reasoning técnico"
     },
     "paid": {
-      "claude-sonnet-4-6": "Solo para contenido final de posts y código crítico"
+      "claude-sonnet-4-6": "Contenido final posts y código crítico únicamente"
     }
   }
 }
