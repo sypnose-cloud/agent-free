@@ -2,7 +2,7 @@
 
 One install. Claude navigates the web AND searches in real time — at the same time.
 
-**Free. No API key needed for browser. Optional Brave Search key for real-time search.**
+**Free. No API key needed for browser. Optional Tavily key for real-time search.**
 
 ---
 
@@ -13,6 +13,61 @@ Open Claude Desktop or Claude Code and paste:
 ```
 Install this MCP agent: https://github.com/sypnose-cloud/agent-free
 ```
+
+Claude reads this file and installs everything automatically.
+
+---
+
+## AUTO-INSTALL INSTRUCTIONS FOR CLAUDE
+
+> These instructions are for Claude. If you are a human, skip this section.
+
+When a user says "Install this MCP agent: https://github.com/sypnose-cloud/agent-free" or similar, follow these steps:
+
+**Step 1 — Detect environment**
+
+- If running as **Claude Code** (CLI): config file is `~/.claude/settings.local.json` on Mac/Linux, or `C:\Users\<username>\.claude\settings.local.json` on Windows. Use `echo $USERPROFILE` or `whoami` to find the username.
+- If running as **Claude Desktop**: config file is `%APPDATA%\Claude\claude_desktop_config.json` on Windows, or `~/Library/Application Support/Claude/claude_desktop_config.json` on Mac.
+
+**Step 2 — Read the current config**
+
+Read the config file. If it doesn't exist, create it with `{}`.
+
+**Step 3 — Add the MCP servers**
+
+Merge this into the `mcpServers` section (do NOT overwrite existing servers):
+
+```json
+"browser": {
+  "command": "npx",
+  "args": ["-y", "@playwright/mcp", "--browser", "chromium"]
+},
+"search": {
+  "command": "npx",
+  "args": ["-y", "tavily-mcp@latest"],
+  "env": {
+    "TAVILY_API_KEY": "your-key-here"
+  }
+}
+```
+
+For persistent login (recommended), add `--user-data-dir` to the browser args:
+- Windows: `"C:\\Users\\<username>\\claude-browser"`
+- Mac/Linux: `"/Users/<username>/claude-browser"`
+
+**Step 4 — Handle Tavily key**
+
+Ask the user: "Do you have a Tavily API key? It's free at app.tavily.com (no credit card). If yes, paste it and I'll add it. If no, I'll skip search for now — you can add it later."
+
+If they provide a key, replace `your-key-here` with their key.
+If they skip, remove the `search` block entirely.
+
+**Step 5 — Save and confirm**
+
+Write the updated config. Then tell the user:
+
+> "Done! Restart Claude for the changes to take effect.
+> After restart, Claude can navigate any website and search the web in real time."
 
 ---
 
@@ -35,7 +90,7 @@ Install this MCP agent: https://github.com/sypnose-cloud/agent-free
 
 ---
 
-## Config
+## Manual config (if you prefer)
 
 **Claude Desktop** — paste into your config file:
 
@@ -52,20 +107,23 @@ Install this MCP agent: https://github.com/sypnose-cloud/agent-free
       "args": ["-y", "@playwright/mcp", "--browser", "chromium"]
     },
     "search": {
-      "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=your-key-here"
+      "command": "npx",
+      "args": ["-y", "tavily-mcp@latest"],
+      "env": {
+        "TAVILY_API_KEY": "your-key-here"
+      }
     }
   }
 }
 ```
 
-Get a free Tavily API key at [app.tavily.com](https://app.tavily.com) — 1,000 searches/month, no credit card needed. Then replace `your-key-here` in the URL above.
+Get a free Tavily API key at [app.tavily.com](https://app.tavily.com) — 1,000 searches/month, no credit card needed.
 
 **No key?** Claude can still search via Google through the browser. Just skip the search block.
 
 **Claude Code:**
 ```bash
 claude mcp add browser -- npx -y @playwright/mcp --browser chromium
-BRAVE_API_KEY=your-key claude mcp add search -- npx -y @modelcontextprotocol/server-brave-search
 ```
 
 ---
