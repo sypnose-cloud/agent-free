@@ -6,7 +6,7 @@
       "description": "Chrome con sesión LinkedIn activa via CDP. Requiere Chrome lanzado con --remote-debugging-port=9222",
       "use_for": "Automatización LinkedIn: navegar, click, publicar posts, enviar conexiones, screenshots",
       "skills": ["linkedin-connect", "connections-optimizer", "content-posts", "data-scraper-agent", "crosspost"],
-      "prereq": "chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\Users\carlo\chrome-debug-profile"
+      "prereq": "chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\\Users\\<username>\\chrome-debug-profile"
     },
     "browser-agent": {
       "command": "npx",
@@ -15,15 +15,6 @@
       "use_for": "Investigar URLs, empresas, personas, noticias. Cualquier página pública sin sesión.",
       "skills": ["deep-research", "data-scraper-agent", "exa-search", "social-graph-ranker"],
       "vs_playwright": "playwright = tu Chrome con LinkedIn abierto. browser-agent = Chrome limpio para cualquier URL."
-    },
-    "knowledge-hub": {
-      "command": "npx",
-      "args": ["-y", "supergateway", "--sse", "http://localhost:18793/sse"],
-      "description": "Memoria persistente Sypnose. REQUIERE SSH tunnel activo antes de iniciar Claude.",
-      "tunnel": "ssh -L 18793:localhost:18793 -p $SYPNOSE_SSH_PORT $SYPNOSE_SSH_USER@$SYPNOSE_SSH_HOST -N &",
-      "use_for": "kb_save, kb_list — guardar y recuperar contexto entre sesiones",
-      "skills": ["daily"],
-      "optional": true
     },
     "canva": {
       "type": "claude_ai_mcp",
@@ -90,21 +81,9 @@
     }
   },
   "chrome_setup": {
-    "cdp_command": "\"C:\Program Files\Google\Chrome\Application\chrome.exe\" --remote-debugging-port=9222 --user-data-dir=\"C:\Users\carlo\chrome-debug-profile\"",
+    "cdp_command": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --remote-debugging-port=9222 --user-data-dir=\"C:\\\\Users\\\\<username>\\\\chrome-debug-profile\"",
     "verify": "curl http://localhost:9222/json/version",
     "note": "Solo necesario para MCP 'playwright'. MCP 'browser-agent' no necesita esto."
   },
-  "clliproxy_models": {
-    "note": "46 modelos via CLIProxy. Meta: 80%+ trabajo GRATIS.",
-    "tunnel": "ssh -L 8317:localhost:8317 -p $SYPNOSE_SSH_PORT $SYPNOSE_SSH_USER@$SYPNOSE_SSH_HOST -N &",
-    "free": {
-      "qwen3-coder-plus": "Scripts, código, automatización",
-      "gemini-2.5-flash": "Análisis textos largos, contexto 1M tokens",
-      "gemini-2.0-flash": "Análisis rápido, noticias",
-      "deepseek-v3": "Reasoning técnico"
-    },
-    "paid": {
-      "claude-sonnet-4-6": "Contenido final posts y código crítico únicamente"
-    }
-  }
+  "note": "Install: paste in Claude → 'Install this MCP agent: https://github.com/sypnose-cloud/agent-free/tree/main/linkedin-agent'"
 }

@@ -53,9 +53,8 @@ Personalizar antes de usar:
 |-----|---------|-------------|
 | `playwright` | LinkedIn con sesión activa (CDP) | Chrome abierto puerto 9222 |
 | `browser-agent` | Navegar cualquier URL, investigar | Ninguno |
-| `knowledge-hub` | Memoria entre sesiones | SSH tunnel |
 | `canva` | Imágenes, carruseles | Nativo Claude AI |
-| `exa` | Búsqueda neural deep research | API key exa.ai |
+| `exa` | Búsqueda neural deep research | API key exa.ai (opcional) |
 
 **Chrome CDP (cuando necesites LinkedIn):**
 ```
@@ -64,13 +63,10 @@ chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\[USER]\chrome-
 
 ---
 
-## SKILLS DISPONIBLES (40)
-
-### Sistema
-`bios` `arranque` `boris` `boris-workflow` `sypnose` `sypnose-create-plan`
+## SKILLS DISPONIBLES (33)
 
 ### LinkedIn & Contenido
-`linkedin-connect` `linkedin-growth` `sypnose-linkedin` `content-posts`
+`linkedin-connect` `linkedin-growth` `content-posts`
 `content-engine` `brand-voice` `daily` `weekly`
 
 ### Distribución
