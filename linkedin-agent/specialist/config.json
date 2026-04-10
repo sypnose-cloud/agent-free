@@ -3,34 +3,107 @@
     "playwright": {
       "command": "npx",
       "args": ["-y", "@playwright/mcp@latest", "--cdp-endpoint", "http://localhost:9222"],
-      "description": "Chrome con sesion LinkedIn activa via CDP",
-      "use_for": "Automatizacion LinkedIn: navegar, click, escribir, screenshot"
+      "description": "Chrome con sesión LinkedIn activa via CDP. Requiere Chrome lanzado con --remote-debugging-port=9222",
+      "use_for": "Automatización LinkedIn principal: navegar, click, escribir, screenshot, posts, conexiones",
+      "skills": ["linkedin-connect", "connections-optimizer", "content-posts", "data-scraper-agent", "crosspost"]
     },
     "browser": {
       "command": "npx",
       "args": ["-y", "@playwright/mcp@latest", "--browser", "chromium", "--user-data-dir", "C:\Users\carlo\chrome-debug-profile"],
-      "description": "Chromium fresco con mismo perfil. Fallback cuando CDP no disponible."
+      "description": "Chromium fresco con mismo perfil de usuario. Fallback cuando CDP no disponible.",
+      "use_for": "Navegación general sin CDP activo",
+      "skills": ["deep-research", "data-scraper-agent"]
     },
     "knowledge-hub": {
       "command": "npx",
       "args": ["-y", "supergateway", "--sse", "http://localhost:18793/sse"],
-      "description": "Memoria persistente Sypnose. Requiere SSH tunnel.",
-      "tunnel": "ssh -L 18793:localhost:18793 -p $SYPNOSE_SSH_PORT $SYPNOSE_SSH_USER@$SYPNOSE_SSH_HOST -N &"
+      "description": "Memoria persistente Sypnose. REQUIERE SSH tunnel activo antes de iniciar Claude.",
+      "tunnel": "ssh -L 18793:localhost:18793 -p $SYPNOSE_SSH_PORT $SYPNOSE_SSH_USER@$SYPNOSE_SSH_HOST -N &",
+      "use_for": "kb_save, kb_list — guardar y recuperar contexto entre sesiones",
+      "skills": ["daily"]
     },
     "canva": {
       "type": "claude_ai_mcp",
-      "use_for": "Imagenes posts LinkedIn, carruseles PDF, banners perfil",
-      "brand": { "bg": "#eeece2", "accent": "#da7756", "text": "#1a1a2e", "fonts": ["Poppins", "Lora", "JetBrains Mono"] }
+      "description": "Canva MCP nativo de Claude AI. No requiere instalación separada.",
+      "use_for": "Imágenes posts LinkedIn, carruseles PDF, banners perfil",
+      "brand": {
+        "bg": "#eeece2",
+        "accent": "#da7756",
+        "text": "#1a1a2e",
+        "fonts": ["Poppins", "Lora", "JetBrains Mono"]
+      },
+      "skills": ["content-engine", "brand-voice", "crosspost"]
     },
-    "figma": { "type": "claude_ai_mcp", "use_for": "Disenos complejos, diagramas FigJam" },
-    "gmail": { "type": "claude_ai_mcp", "use_for": "Cold emails, respuestas recruiters" },
-    "google-calendar": { "type": "claude_ai_mcp", "use_for": "Follow-ups, scheduling calls" }
+    "figma": {
+      "type": "claude_ai_mcp",
+      "description": "Figma MCP nativo de Claude AI.",
+      "use_for": "Diseños complejos, diagramas FigJam, arquitecturas visuales"
+    },
+    "gmail": {
+      "type": "claude_ai_mcp",
+      "description": "Gmail MCP nativo de Claude AI.",
+      "use_for": "Cold emails, respuestas recruiters, outreach",
+      "skills": ["lead-intelligence"]
+    },
+    "google-calendar": {
+      "type": "claude_ai_mcp",
+      "description": "Google Calendar MCP nativo de Claude AI.",
+      "use_for": "Follow-ups, scheduling calls, recordatorios de golden hour",
+      "skills": ["daily", "lead-intelligence"]
+    },
+    "exa": {
+      "command": "npx",
+      "args": ["-y", "@exa-labs/exa-mcp-server"],
+      "env": { "EXA_API_KEY": "$EXA_API_KEY" },
+      "description": "Búsqueda neural Exa. Instalación: npm install -g @exa-labs/exa-mcp-server. API key en exa.ai (free tier: 1000 búsquedas/mes).",
+      "use_for": "Investigación profunda de personas y empresas, búsqueda semántica, find_similar pages",
+      "skills": ["exa-search", "deep-research", "lead-intelligence", "social-graph-ranker"],
+      "free_alternative": "WebSearch nativo de Claude Code (menos preciso, sin find_similar)"
+    },
+    "x-api": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-twitter"],
+      "env": {
+        "TWITTER_API_KEY": "$TWITTER_API_KEY",
+        "TWITTER_API_SECRET": "$TWITTER_API_SECRET",
+        "TWITTER_ACCESS_TOKEN": "$TWITTER_ACCESS_TOKEN",
+        "TWITTER_ACCESS_TOKEN_SECRET": "$TWITTER_ACCESS_TOKEN_SECRET"
+      },
+      "description": "API oficial X/Twitter. Instalación: npm install -g @modelcontextprotocol/server-twitter. API keys en developer.twitter.com (Basic tier: $100/mes). Alternativa gratuita: playwright MCP → twitter.com con sesión activa.",
+      "use_for": "Publicar threads técnicos, buscar conversaciones sobre AI agents, analizar engagement, monitorear menciones Sypnose",
+      "skills": ["x-api", "crosspost", "deep-research"],
+      "free_alternative": "playwright MCP → twitter.com (publicar manual, sin búsqueda API)"
+    },
+    "data-scraper": {
+      "note": "No requiere MCP separado. Usa playwright (ya instalado) como motor de scraping.",
+      "description": "Para scraping avanzado usar Gemini Flash via CLIProxy (contexto 1M tokens, GRATIS). Ver clliproxy_models.",
+      "use_for": "Scraping bulk de perfiles LinkedIn, monitoreo posts virales, extracción datos empresas",
+      "skills": ["data-scraper-agent"],
+      "setup": {
+        "motor_scraping": "playwright MCP (ya instalado)",
+        "modelo_analisis": "gemini-2.5-flash via CLIProxy (gratis, contexto 1M tokens)",
+        "almacenamiento": "data/contactos_nuevos_YYYY-MM-DD.json",
+        "rate_limit": "max 100 acciones/día LinkedIn — NO superar"
+      }
+    }
   },
   "chrome_setup": {
-    "command": "chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\Users\carlo\chrome-debug-profile",
-    "verify": "curl http://localhost:9222/json/version"
+    "command": "\"C:\Program Files\Google\Chrome\Application\chrome.exe\" --remote-debugging-port=9222 --user-data-dir=\"C:\Users\carlo\chrome-debug-profile\"",
+    "verify": "curl http://localhost:9222/json/version",
+    "note": "Carlos ejecuta este comando antes de iniciar Claude cuando se necesita automatización LinkedIn"
   },
-  "free_models_via_clliproxy": ["qwen3-coder-plus", "gemini-2.5-flash", "gemini-2.0-flash", "deepseek-v3"],
-  "paid_models": ["claude-sonnet-4-6"],
-  "goal": "80%+ trabajo con modelos GRATIS"
+  "clliproxy_models": {
+    "note": "46 modelos via CLIProxy (requiere SSH tunnel al servidor Sypnose). Meta: 80%+ trabajo con modelos GRATIS.",
+    "tunnel": "ssh -L 8317:localhost:8317 -p $SYPNOSE_SSH_PORT $SYPNOSE_SSH_USER@$SYPNOSE_SSH_HOST -N &",
+    "endpoint": "http://localhost:8317/v1/chat/completions",
+    "free": {
+      "qwen3-coder-plus": "Scripts, automatización, código",
+      "gemini-2.5-flash": "Análisis textos largos, investigación, contexto 1M tokens",
+      "gemini-2.0-flash": "Análisis rápido, noticias, resúmenes",
+      "deepseek-v3": "Reasoning, análisis técnico"
+    },
+    "paid": {
+      "claude-sonnet-4-6": "Solo para contenido final de posts y código crítico"
+    }
+  }
 }
