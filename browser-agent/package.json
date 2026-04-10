@@ -1,0 +1,21 @@
+{
+  "name": "@sypnose/browser-agent",
+  "version": "1.0.0",
+  "description": "Free browser navigation for Claude Desktop and Claude Code",
+  "bin": {
+    "browser-agent": "./bin/start.js"
+  },
+  "scripts": {
+    "start": "node bin/start.js"
+  },
+  "dependencies": {
+    "@playwright/mcp": "latest"
+  },
+  "keywords": ["claude", "mcp", "browser", "playwright", "ai"],
+  "author": "Sypnose <github.com/sypnose-cloud>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sypnose-cloud/agent-free"
+  }
+}

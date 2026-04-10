@@ -20,24 +20,15 @@ Then add to your Claude config. [Full instructions →](./browser-agent/README.m
 
 ---
 
-## Quick start (Claude Desktop)
+## Install
 
-```json
-{
-  "mcpServers": {
-    "browser": {
-      "command": "npx",
-      "args": ["@playwright/mcp", "--browser", "chromium"]
-    }
-  }
-}
+Open Claude Desktop or Claude Code and paste:
+
+```
+Install this MCP agent: https://github.com/sypnose-cloud/agent-free
 ```
 
-Config file location:
-- **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
-- **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
-
-Restart Claude Desktop. Done.
+Claude configures everything automatically.
 
 ---
 
