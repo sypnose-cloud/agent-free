@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "browser": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp",
+        "--browser", "chromium",
+        "--user-data-dir", "C:\\Users\\YourName\\claude-browser-profile"
+      ]
+    }
+  }
+}
