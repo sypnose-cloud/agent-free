@@ -40,7 +40,7 @@ Merge this into the `mcpServers` section (do NOT overwrite existing servers):
 ```json
 "browser": {
   "command": "npx",
-  "args": ["-y", "@playwright/mcp", "--browser", "chromium"]
+  "args": ["-y", "@playwright/mcp", "--browser", "chrome"]
 }
 ```
 
@@ -93,7 +93,7 @@ Write the updated config. Then tell the user:
   "mcpServers": {
     "browser": {
       "command": "npx",
-      "args": ["-y", "@playwright/mcp", "--browser", "chromium"]
+      "args": ["-y", "@playwright/mcp", "--browser", "chrome"]
     },
     "search": {
       "command": "npx",
@@ -112,7 +112,7 @@ Get a free Tavily API key at [app.tavily.com](https://app.tavily.com) — 1,000 
 
 **Claude Code:**
 ```bash
-claude mcp add browser -- npx -y @playwright/mcp --browser chromium
+claude mcp add browser -- npx -y @playwright/mcp --browser chrome
 ```
 
 ---
@@ -122,7 +122,7 @@ claude mcp add browser -- npx -y @playwright/mcp --browser chromium
 Add `--user-data-dir` to remember your logins:
 
 ```json
-"args": ["-y", "@playwright/mcp", "--browser", "chromium", "--user-data-dir", "C:\\Users\\YourName\\claude-browser"]
+"args": ["-y", "@playwright/mcp", "--browser", "chrome", "--user-data-dir", "C:\\Users\\YourName\\claude-browser"]
 ```
 
 Log in once to LinkedIn, Gmail, GitHub — Claude remembers forever.
