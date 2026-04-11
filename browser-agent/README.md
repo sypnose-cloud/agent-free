@@ -33,30 +33,82 @@ When a user says "Install this MCP agent: https://github.com/sypnose-cloud/agent
 
 Read the config file. If it doesn't exist, create it with `{}`.
 
-**Step 3 — Add the MCP servers**
+**Step 3 — Create the browser-agent reconnect wrapper**
+
+Create the file `~/.claude/mcp-servers/browser-reconnect.js` (Mac/Linux) or `C:\Users\<username>\.claude\mcp-servers\browser-reconnect.js` (Windows) with this exact content:
+
+```js
+#!/usr/bin/env node
+// Sypnose browser-agent — auto-reconnect wrapper
+// Restarts @playwright/mcp automatically if Chrome crashes or CDP disconnects
+const { spawn } = require('child_process');
+
+const RESTART_DELAY_MS = 3000;
+let attempt = 0;
+
+function start() {
+  attempt++;
+  if (attempt > 1) {
+    process.stderr.write(`[browser-agent] Reconnecting (attempt ${attempt})...\n`);
+  }
+
+  const args = ['-y', '@playwright/mcp@latest', '--browser', 'chrome', ...process.argv.slice(2)];
+
+  const proc = spawn('npx', args, {
+    stdio: 'inherit',
+    shell: process.platform === 'win32'
+  });
+
+  proc.on('exit', (code) => {
+    if (code === 0) process.exit(0); // clean exit, don't restart
+    process.stderr.write(`[browser-agent] exited (code ${code}), restarting in ${RESTART_DELAY_MS}ms...\n`);
+    setTimeout(start, RESTART_DELAY_MS);
+  });
+
+  proc.on('error', (err) => {
+    process.stderr.write(`[browser-agent] error: ${err.message}, restarting in ${RESTART_DELAY_MS}ms...\n`);
+    setTimeout(start, RESTART_DELAY_MS);
+  });
+}
+
+start();
+```
+
+**Step 4 — Add the MCP servers**
 
 Merge this into the `mcpServers` section (do NOT overwrite existing servers):
 
+**Windows:**
 ```json
-"browser": {
-  "command": "npx",
-  "args": ["-y", "@playwright/mcp", "--browser", "chrome"]
+"browser-agent": {
+  "command": "node",
+  "args": ["C:\\Users\\<username>\\.claude\\mcp-servers\\browser-reconnect.js"],
+  "description": "Chrome browser with auto-reconnect"
 }
 ```
 
-For persistent login (recommended), add `--user-data-dir` to the browser args:
-- Windows: `"C:\\Users\\<username>\\claude-browser"`
-- Mac/Linux: `"/Users/<username>/claude-browser"`
+**Mac/Linux:**
+```json
+"browser-agent": {
+  "command": "node",
+  "args": ["/Users/<username>/.claude/mcp-servers/browser-reconnect.js"],
+  "description": "Chrome browser with auto-reconnect"
+}
+```
 
-**Step 4 — Save and confirm**
+Replace `<username>` with the actual system username.
 
-Write the updated config. Then tell the user:
+For persistent login (recommended), add `--user-data-dir <path>` at the end of the args array.
+
+**Step 5 — Save and confirm**
+
+Write the updated config and the wrapper file. Then tell the user:
 
 > "Done! To apply the changes:
 > - **Claude Code**: type `/exit` then run `claude` again
 > - **Claude Desktop**: close the app completely and reopen it
 >
-> After restart, Claude can navigate any website, click, fill forms, and take screenshots."
+> After restart, Claude can navigate any website. If Chrome crashes, it reconnects automatically in 3 seconds."
 
 ---
 
