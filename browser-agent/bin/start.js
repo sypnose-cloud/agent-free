@@ -1,11 +1,16 @@
 #!/usr/bin/env node
-// @sypnose/browser-agent — starts Playwright MCP with Chromium
+// @sypnose/browser-agent — starts Playwright MCP with Chrome
+// Note: binary renamed from mcp-server-playwright to playwright-mcp in @playwright/mcp >= 0.0.60
 const { spawn } = require('child_process');
 const path = require('path');
 
-const mcpBin = path.resolve(__dirname, '../node_modules/.bin/mcp-server-playwright');
+// Try new binary name first, fall back to old name
+const newBin = path.resolve(__dirname, '../node_modules/.bin/playwright-mcp');
+const oldBin = path.resolve(__dirname, '../node_modules/.bin/mcp-server-playwright');
+const fs = require('fs');
+const mcpBin = fs.existsSync(newBin) ? newBin : oldBin;
 
-const args = ['--browser', 'chromium', ...process.argv.slice(2)];
+const args = ['--browser', 'chrome', ...process.argv.slice(2)];
 
 const child = spawn(mcpBin, args, {
   stdio: 'inherit',
